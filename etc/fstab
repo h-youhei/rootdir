@@ -1,0 +1,29 @@
+#
+# See fstab(5).
+#
+# NOTE: fsck
+# 0 nocheck
+# 1 check first. root partition should be set to 1
+# 2 All other filesystems to be checked.
+
+# NOTE: options
+# https://www.kernel.org/doc/Documentations/filesystems
+
+# NOTE: To get uuid
+# blkid | grep /dev/sda >> /etc/fstab
+# blkid -o value -s UUID /dev/sda<n> >> /etc/fstab
+
+# NOTE: To test
+# mount -o remount mountpoint
+
+#<device> <mountpoint> <filesystem> <options> <dump> <fsck>
+
+#/dev/sda1 LABEL=EFI
+UUID=D5E6-64FA /boot vfat defaults,noatime 0 2
+#/dev/sda2 LABEL=SWAP
+UUID=4788-EF44 swap swap defaults,noatime,discard 0 0
+#/dev/sda3 LABEL=VOID
+UUID=2fdc611c-0f16-4f92-afe2-f7f8a27e7efe / f2fs defaults,noatime,discard 0 1
+#/dev/sda4 LABEL=HOME
+UUID=2a7ad40b-0b9b-46d7-8daa-6db55a0c0a8c /home f2fs defaults,noatime,discard 0 2
+
